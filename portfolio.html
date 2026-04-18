@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Mohammad Tufel Jerawala — Full Stack Developer</title>
+<meta name="description" content="Full Stack Developer with 4+ years building real-time, scalable web systems with React, Next.js, Node and MongoDB." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#fbfcfe; --fg:#0b1220; --muted:#6b7280; --border:#e5e7eb;
+    --card:#ffffff; --secondary:#f3f4f6; --brand:#2b5bff; --brand-soft:#eef2ff;
+    --radius:12px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:var(--fg);background:var(--bg);
+    font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;
+    background-image:linear-gradient(to right,rgba(229,231,235,.5) 1px,transparent 1px),linear-gradient(to bottom,rgba(229,231,235,.5) 1px,transparent 1px);
+    background-size:64px 64px;
+  }
+  ::selection{background:rgba(43,91,255,.2)}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+  .mono{font-family:'JetBrains Mono',ui-monospace,monospace}
+  .brand{color:var(--brand)}
+  .muted{color:var(--muted)}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:999px;font-weight:500;font-size:14px;border:1px solid transparent;cursor:pointer;transition:.2s}
+  .btn-dark{background:var(--fg);color:#fff}
+  .btn-dark:hover{background:#1f2937}
+  .btn-outline{background:transparent;border-color:var(--border);color:var(--fg)}
+  .btn-outline:hover{background:var(--secondary)}
+  .icon-btn{display:inline-grid;place-items:center;width:38px;height:38px;border-radius:999px;border:1px solid var(--border);background:#fff;transition:.2s}
+  .icon-btn:hover{background:var(--secondary)}
+  .chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.8);backdrop-filter:blur(8px);font-size:12px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--brand);position:relative}
+  .dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--brand);animation:ping 1.4s ease-out infinite;opacity:.6}
+  @keyframes ping{75%,100%{transform:scale(2.2);opacity:0}}
+  .tag{display:inline-block;padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:var(--bg);font-family:'JetBrains Mono',monospace;font-size:11px;color:#374151}
+
+  /* Navbar */
+  header.nav{position:fixed;top:0;left:0;right:0;z-index:50;transition:.2s;background:transparent}
+  header.nav.scrolled{background:rgba(251,252,254,.75);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{display:flex;align-items:center;gap:12px}
+  .logo-mark{width:36px;height:36px;border-radius:8px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;letter-spacing:-.02em}
+  .logo-text{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted)}
+  .nav-links{display:none;gap:28px;list-style:none;margin:0;padding:0}
+  .nav-links a{font-size:14px;color:#374151;display:inline-flex;gap:6px;align-items:baseline}
+  .nav-links a span.num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+  .nav-links a:hover{color:var(--fg)}
+  @media(min-width:900px){.nav-links{display:flex}.logo-text{display:inline}}
+  @media(max-width:899px){.logo-text{display:none}}
+
+  /* Hero */
+  .hero{padding:120px 0 80px;position:relative}
+  .pill-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:32px}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.25em;color:var(--brand);margin:0 0 18px}
+  h1.name{font-weight:800;line-height:.92;letter-spacing:-.03em;font-size:clamp(2.6rem,11vw,9rem);margin:0}
+  h1.name span{display:block}
+  .outline{-webkit-text-stroke:2px var(--brand);color:transparent}
+  .accent-dot{color:var(--brand)}
+  .hero-grid{display:grid;gap:48px;margin-top:48px}
+  @media(min-width:1000px){.hero-grid{grid-template-columns:1.1fr 1fr;align-items:end}}
+  .hero-sub{display:flex;gap:14px;align-items:flex-start;margin-bottom:14px}
+  .hero-sub .bar{display:block;width:32px;height:1px;background:var(--fg);margin-top:18px;flex-shrink:0}
+  .hero-sub h2{font-size:clamp(1.4rem,2.4vw,1.8rem);font-weight:600;letter-spacing:-.01em;margin:0;line-height:1.35}
+  .hero p.lead{color:var(--muted);max-width:560px;font-size:17px;line-height:1.6}
+  .cta-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:28px}
+
+  /* Code card */
+  .code-card{border:1px solid var(--border);border-radius:12px;background:var(--card);box-shadow:0 25px 50px -12px rgba(11,18,32,.08);overflow:hidden}
+  .code-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid var(--border);background:rgba(243,244,246,.4)}
+  .traffic{display:flex;gap:6px}
+  .traffic span{width:12px;height:12px;border-radius:50%}
+  .t-r{background:#ff6058}.t-y{background:#ffbd2e}.t-g{background:#28ca42}
+  .code-title{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted)}
+  pre.code{margin:0;padding:20px;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.7;overflow-x:auto;color:var(--fg)}
+  .c-com{color:#9ca3af}.c-key{color:var(--brand)}.c-str{color:#16a34a}.c-num{color:#f97316}
+  .caret{display:inline-block;width:8px;height:16px;background:var(--brand);vertical-align:middle;margin-left:4px;animation:blink 1s step-end infinite}
+  @keyframes blink{50%{opacity:0}}
+
+  /* Marquee */
+  .marquee-wrap{margin-top:80px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);overflow:hidden;background:rgba(251,252,254,.6);backdrop-filter:blur(8px)}
+  .marquee{display:flex;width:max-content;gap:72px;padding:24px 0;animation:marquee 35s linear infinite}
+  .marquee span{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:600;color:var(--fg);display:inline-flex;align-items:center;gap:72px}
+  .marquee span::after{content:"◆";color:var(--brand)}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* Sections */
+  section{padding:96px 0;border-top:1px solid var(--border)}
+  section.alt{background:rgba(251,252,254,.6)}
+  .sec-head{max-width:760px;margin-bottom:56px}
+  .sec-eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.25em;color:var(--brand);margin:0 0 14px}
+  .sec-title{font-size:clamp(2rem,4vw,3rem);font-weight:700;letter-spacing:-.02em;margin:0;line-height:1.05}
+  .sec-desc{margin-top:18px;color:var(--muted);font-size:18px}
+
+  /* About */
+  .about-grid{display:grid;gap:56px}
+  @media(min-width:1000px){.about-grid{grid-template-columns:1.2fr 1fr}}
+  .about-grid p{font-size:17px;line-height:1.65;color:var(--muted);margin:0 0 22px}
+  .about-grid p strong{color:var(--fg);font-weight:500}
+  .edu{border:1px solid var(--border);background:var(--card);border-radius:12px;padding:24px}
+  .edu .label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin:0 0 10px}
+  .edu h3{margin:0;font-size:18px}
+  .edu p.small{margin:6px 0 0;font-size:13px;color:var(--muted)}
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}
+  .stat{background:var(--card);padding:24px}
+  .stat .v{font-size:36px;font-weight:700;color:var(--brand);letter-spacing:-.02em}
+  .stat .l{font-size:13px;color:var(--muted);margin-top:4px}
+  .bring{margin-top:24px;border:1px solid var(--border);background:var(--card);border-radius:12px;padding:24px}
+  .bring h3{margin:0 0 18px;font-size:18px}
+  .bring ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+  .bring li{display:flex;gap:12px;font-size:14px}
+  .check{flex-shrink:0;width:20px;height:20px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-size:12px;font-weight:700}
+
+  /* Skills */
+  .skills-grid{display:grid;grid-template-columns:1fr;gap:20px}
+  @media(min-width:700px){.skills-grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:1000px){.skills-grid{grid-template-columns:1fr 1fr 1fr}}
+  .skill-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:28px;transition:.2s, box-shadow .2s;box-shadow:0 8px 20px rgba(15,23,42,.04)}
+  .skill-card:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(15,23,42,.08)}
+  .skill-head{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+  .skill-icon{width:48px;height:48px;border-radius:16px;background:rgba(43,91,255,.12);color:var(--brand);display:grid;place-items:center;font-size:22px;transition:.2s}
+  .skill-card:hover .skill-icon{background:rgba(43,91,255,.18);color:var(--brand)}
+  .skill-card h3{margin:0;font-size:18px}
+  .skill-tags{display:flex;flex-wrap:wrap;gap:10px}
+  .tag{display:inline-block;padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:var(--bg);font-family:'JetBrains Mono',monospace;font-size:13px;color:#111827}
+
+  /* Experience */
+  .exp-grid{display:grid;gap:32px}
+  @media(min-width:900px){.exp-grid{grid-template-columns:1fr 2fr}}
+  .exp-list{display:flex;flex-direction:column;gap:8px;list-style:none;margin:0;padding:0}
+  .exp-list button{text-align:left;width:100%;border-radius:10px;border:1px solid var(--border);background:var(--card);padding:16px;cursor:pointer;font:inherit;color:inherit;transition:.2s}
+  .exp-list button:hover{background:rgba(243,244,246,.5)}
+  .exp-list button.active{border-color:var(--brand);background:rgba(43,91,255,.05)}
+  .exp-list .period{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted)}
+  .exp-list .co{font-weight:600;margin-top:4px}
+  .exp-list .role{font-size:13px;color:var(--muted)}
+  .exp-card{border:1px solid var(--border);background:var(--card);border-radius:12px;padding:32px}
+  .exp-card h3{margin:0 0 4px;font-size:22px}
+  .exp-card .meta{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);margin-bottom:18px}
+  .exp-card p.summary{color:var(--muted);margin:0 0 18px;line-height:1.6}
+  .exp-card ul.bullets{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:10px}
+  .exp-card ul.bullets li{display:flex;gap:10px;font-size:14px;line-height:1.5}
+  .exp-card ul.bullets li::before{content:"▸";color:var(--brand);flex-shrink:0}
+  .stack-row{display:flex;flex-wrap:wrap;gap:8px}
+
+  /* Projects */
+  .proj-grid{display:grid;grid-template-columns:1fr;gap:24px}
+  @media(min-width:800px){.proj-grid{grid-template-columns:1fr 1fr}}
+  .proj{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:28px;transition:.25s, transform .25s;cursor:pointer;display:flex;flex-direction:column;gap:18px}
+  .proj:hover{background:rgba(243,244,246,.8);transform:translateY(-2px);border-color:rgba(43,91,255,.35)}
+  .proj .top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px}
+  .proj .top .label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin:0}
+  .proj .top .card-action{width:44px;height:44px;border-radius:14px;border:1px solid var(--border);background:var(--card);color:var(--brand);font-size:18px;display:grid;place-items:center;cursor:pointer;transition:.2s}
+  .proj .top .card-action:hover{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .proj h3{margin:0;font-size:24px;letter-spacing:-.02em;line-height:1.1}
+  .proj p.blurb{margin:0;color:var(--muted);line-height:1.7;min-height:56px}
+  .proj .live-link{display:inline-flex;align-items:center;gap:8px;color:var(--brand);font-weight:600;font-size:14px;text-decoration:none;margin:0 0 16px;transition:.2s ease}
+  .proj .live-link::before{content:'●';font-size:10px;margin-right:4px}
+  .proj ul.points{list-style:none;padding:0;margin:0 0 18px;display:grid;gap:10px}
+  .proj ul.points li{display:flex;gap:10px;font-size:15px;line-height:1.6}
+  .proj ul.points li::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand);margin-top:8px;flex-shrink:0}
+  .proj .stack-row{display:flex;flex-wrap:wrap;gap:10px}
+
+  /* Awards */
+  .awards{display:grid;gap:20px}
+  @media(min-width:800px){.awards{grid-template-columns:1fr 1fr}}
+  .award{border:1px solid var(--border);background:var(--card);border-radius:12px;padding:28px;transition:.2s}
+  .award:hover{border-color:var(--brand)}
+  .award-head{display:flex;align-items:center;gap:16px;margin-bottom:16px}
+  .award-icon{width:48px;height:48px;border-radius:10px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-size:22px;transition:.2s}
+  .award:hover .award-icon{background:var(--brand);color:#fff}
+  .award h3{margin:0;font-size:20px}
+  .award .org{font-size:13px;color:var(--muted)}
+  .award p{margin:0;color:var(--muted);line-height:1.55}
+
+  /* Contact */
+  .contact-grid{display:grid;gap:36px}
+  @media(min-width:900px){.contact-grid{grid-template-columns:1fr 1fr}}
+  .info-card{display:flex;align-items:center;gap:16px;border:1px solid var(--border);background:var(--card);border-radius:12px;padding:18px;transition:.2s}
+  .info-card + .info-card{margin-top:14px}
+  .info-card:hover{border-color:var(--brand)}
+  .info-icon{width:42px;height:42px;border-radius:10px;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-size:18px;transition:.2s}
+  .info-card:hover .info-icon{background:var(--brand);color:#fff}
+  .info-card .label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted)}
+  .info-card .val{font-weight:500}
+  .info-card .arrow{margin-left:auto;color:var(--muted);transition:.2s}
+  .info-card:hover .arrow{color:var(--brand);transform:translateX(2px)}
+  .socials{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .social-btn{display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;border:1px solid var(--border);background:var(--card);font-size:14px;transition:.2s}
+  .social-btn:hover{background:var(--secondary)}
+  form.contact-form{border:1px solid var(--border);background:var(--card);border-radius:12px;padding:28px;display:grid;gap:16px}
+  .field label{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--muted);margin-bottom:8px}
+  .field input,.field textarea{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:8px;background:#fff;font:inherit;font-size:14px;color:var(--fg);transition:.15s}
+  .field input:focus,.field textarea:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 3px rgba(43,91,255,.15)}
+  .field textarea{resize:vertical;min-height:120px}
+  form.contact-form button{width:100%;justify-content:center}
+
+  /* Footer */
+  footer{background:#0b1220;color:#f8fafc;padding:56px 0 24px;border-top:1px solid rgba(255,255,255,.08)}
+  .footer-top{display:grid;gap:32px;align-items:flex-start}
+  @media(min-width:900px){.footer-top{grid-template-columns:1.8fr 1fr 1fr}}
+  .footer-about{display:flex;align-items:flex-start;gap:18px}
+  .footer-logo{width:48px;height:48px;border-radius:16px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:700;font-size:16px}
+  .footer-about-text{max-width:360px}
+  .footer-name{margin:0;font-size:18px;font-weight:700;color:#fff}
+  .footer-copy{margin:10px 0 0;color:rgba(248,250,252,.75);line-height:1.8}
+  .footer-label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:rgba(148,163,184,.9);margin:0 0 18px}
+  .footer-nav ul{list-style:none;margin:0;padding:0}
+  .footer-nav li{margin-bottom:12px}
+  .footer-nav a{color:rgba(248,250,252,.82);text-decoration:none;transition:.2s}
+  .footer-nav a:hover{color:#fff}
+  .footer-socials{display:flex;gap:10px;flex-wrap:wrap}
+  .social-icon{width:44px;height:44px;border-radius:14px;border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;color:#fff;background:rgba(255,255,255,.04);transition:.2s}
+  .social-icon:hover{border-color:var(--brand);background:rgba(43,91,255,.15)}
+  .footer-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;align-items:center;padding-top:24px;margin-top:24px;border-top:1px solid rgba(255,255,255,.08);font-size:13px;color:rgba(248,250,252,.7)}
+  .back-top{color:var(--brand);text-decoration:none;font-weight:600}
+
+  /* Icons (inline SVG sized) */
+  svg.i{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  svg.i-lg{width:22px;height:22px}
+
+  /* Modal */
+  .modal-backdrop{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:16px;background:rgba(11,18,32,.6);backdrop-filter:blur(4px);animation:fade .2s ease-out}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+  .modal{position:relative;width:100%;max-width:680px;max-height:90vh;overflow-y:auto;background:var(--card);border:1px solid var(--border);border-radius:18px;padding:32px;box-shadow:0 30px 60px -20px rgba(11,18,32,.3)}
+  @media(min-width:600px){.modal{padding:44px}}
+  .modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:999px;border:1px solid var(--border);background:#fff;display:grid;place-items:center;cursor:pointer;color:var(--muted);transition:.15s}
+  .modal-close:hover{border-color:var(--brand);color:var(--brand)}
+  .modal .m-tag{font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;letter-spacing:.2em;color:var(--brand);margin:0 0 16px}
+  .modal h3{font-size:clamp(1.6rem,3.4vw,2.2rem);font-weight:700;letter-spacing:-.02em;margin:0 0 18px;line-height:1.15}
+  .modal p.detail{color:var(--muted);line-height:1.65;margin:0 0 28px;font-size:15px}
+  .modal .m-label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin:0 0 12px}
+  .modal ul.m-points{list-style:none;padding:0;margin:0 0 28px;display:grid;gap:12px}
+  .modal ul.m-points li{display:flex;gap:12px;font-size:15px;align-items:flex-start}
+  .modal ul.m-points li::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--brand);margin-top:8px;flex-shrink:0}
+  .modal .m-stack{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:8px}
+  .modal a.visit{display:inline-flex;align-items:center;gap:8px;margin-top:24px;background:var(--fg);color:#fff;padding:10px 20px;border-radius:999px;font-size:14px;font-weight:500}
+  .modal a.visit:hover{background:#1f2937}
+  .proj{cursor:pointer}
+
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">MT</span>
+      <span class="logo-text">Full Stack Developer</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about"><span class="num">01.</span>About</a></li>
+      <li><a href="#skills"><span class="num">02.</span>Skills</a></li>
+      <li><a href="#experience"><span class="num">03.</span>Experience</a></li>
+      <li><a href="#projects"><span class="num">04.</span>Projects</a></li>
+      <li><a href="#awards"><span class="num">05.</span>Awards</a></li>
+      <li><a href="#contact"><span class="num">06.</span>Contact</a></li>
+    </ul>
+    <a href="#contact" class="btn btn-dark" style="padding:8px 18px">Let's talk</a>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero" style="border-top:none;padding-top:120px">
+    <div class="container">
+      <div class="pill-row">
+        <span class="chip"><span class="dot"></span>Available anywhere</span>
+        <span class="chip muted">📍 Ahmedabad, Gujarat, India</span>
+      </div>
+      <p class="eyebrow">Hello, world — I am</p>
+      <h1 class="name">
+        <span>Mohammad</span>
+        <span class="outline">Tufel</span>
+        <span>Jerawala<span class="accent-dot">.</span></span>
+      </h1>
+
+      <div class="hero-grid">
+        <div>
+          <div class="hero-sub">
+            <span class="bar"></span>
+            <h2>Full Stack Developer <span class="muted">/</span> <span class="brand">4+ years</span><br>crafting real-time, scalable systems.</h2>
+          </div>
+          <p class="lead">I ship production-ready products that solve real problems, from fast React and Next.js frontends to Node.js/MongoDB APIs and Electron desktop tools. My work is built for scale, speed and robustness in real-time systems, with end-to-end ownership across UI, backend and infrastructure.</p>
+          <div class="cta-row">
+            <a href="#projects" class="btn btn-dark">View my work →</a>
+            <a href="#contact" class="btn btn-outline">Get in touch</a>
+            <a href="https://github.com/jerawalatufel" target="_blank" rel="noreferrer" class="icon-btn" aria-label="GitHub"><svg class="i" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+            <a href="https://www.linkedin.com/in/mohammad-tufel-jerawala-b9907b19a/" target="_blank" rel="noreferrer" class="icon-btn" aria-label="LinkedIn"><svg class="i" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+            <a href="mailto:jerawalatufel@gmail.com" class="icon-btn" aria-label="Email"><svg class="i" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+          </div>
+        </div>
+
+        <div class="code-card">
+          <div class="code-head">
+            <div class="traffic"><span class="t-r"></span><span class="t-y"></span><span class="t-g"></span></div>
+            <span class="code-title">~/tufel/profile.ts</span>
+            <span style="width:48px"></span>
+          </div>
+<pre class="code"><span class="c-com">// whoami</span>
+<span class="c-key">const</span> dev = {
+  name: <span class="c-str">"Mohammad Tufel"</span>,
+  role: <span class="c-str">"Full Stack Developer"</span>,
+  stack: [<span class="c-str">"MERN Stack"</span>, <span class="c-str">"Next"</span>, <span class="c-str">"Laravel"</span>, <span class="c-str">"MySql"</span>],
+  loves: [<span class="c-str">"realtime"</span>, <span class="c-str">"microservices"</span>],
+  years: <span class="c-num">4+</span>,
+  shipping: <span class="c-key">true</span>,
+};<span class="caret"></span></pre>
+        </div>
+      </div>
+
+      <div class="marquee-wrap">
+        <div class="marquee">
+          <span>JavaScript</span><span>TypeScript</span><span>PHP</span><span>React.js</span><span>Next.js</span><span>Redux</span><span>Context API</span><span>MySQL</span><span>MongoDB</span><span>Redis</span><span>AWS</span><span>CI/CD</span><span>Git</span><span>SonarQube</span><span>Docker</span><span>Node.js</span><span>Express.js</span><span>Laravel</span><span>Socket.io</span><span>MQTT</span><span>Generative AI</span><span>Microservices</span><span>Electron</span>
+          <span>JavaScript</span><span>TypeScript</span><span>PHP</span><span>React.js</span><span>Next.js</span><span>Redux</span><span>Context API</span><span>MySQL</span><span>MongoDB</span><span>Redis</span><span>AWS</span><span>CI/CD</span><span>Git</span><span>SonarQube</span><span>Docker</span><span>Node.js</span><span>Express.js</span><span>Laravel</span><span>Socket.io</span><span>MQTT</span><span>Generative AI</span><span>Microservices</span><span>Electron</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about" class="alt">
+    <div class="container">
+      <div class="sec-head">
+        <p class="sec-eyebrow">01 / About</p>
+        <h2 class="sec-title">I design, build and <span class="brand">ship software that</span> scales.</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>Full Stack Developer with 4+ years of experience crafting end-to-end solutions — from intuitive frontends to efficient, real-time backend systems. I care about performance, clean architecture and shipping work that actually moves the needle.</p>
+          <p>Currently leading real-time healthcare dashboards at <strong>Kali MedTech</strong>, previously senior at <strong>WildTigers</strong> and <strong>Mind Inventory</strong>. My sweet spot is the messy middle where frontend meets backend meets infra.</p>
+          <div class="edu">
+            <p class="label">Education</p>
+            <h3>B.Tech in Computer Engineering</h3>
+            <p class="small">Charotar University of Science and Technology (CHARUSAT) • Aug 2018 — Apr 2022</p>
+            <p class="small" style="margin-top:8px">CGPA: <span class="brand" style="font-weight:600">8.13 / 10</span></p>
+          </div>
+        </div>
+        <div>
+          <div class="stats">
+            <div class="stat"><div class="v">4+</div><div class="l">Years of Experience</div></div>
+            <div class="stat"><div class="v">3</div><div class="l">Companies</div></div>
+            <div class="stat"><div class="v">20+</div><div class="l">Major Projects</div></div>
+            <div class="stat"><div class="v">30+</div><div class="l">Tech Stack Depth</div></div>
+          </div>
+          <div class="bring">
+            <p class="label" style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:var(--muted);margin:0 0 10px">What I bring</p>
+            <h3>End-to-end ownership, with a bias for performance.</h3>
+            <ul>
+              <li><span class="check">✓</span>Designing event-driven microservices</li>
+              <li><span class="check">✓</span>Real-time data with Socket.io / MQTT</li>
+              <li><span class="check">✓</span>Query optimization & scalable DBs</li>
+              <li><span class="check">✓</span>Clean, pixel-perfect UIs from Figma</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="container">
+      <div class="sec-head">
+        <p class="sec-eyebrow">02 / Skills</p>
+        <h2 class="sec-title">A deep, pragmatic <span class="brand">toolkit.</span></h2>
+        <p class="sec-desc">I lean on battle-tested tools, but I pick up new ones quickly. Here is what I reach for on a typical day.</p>
+      </div>
+      <div class="skills-grid">
+        <div class="skill-card"><div class="skill-head"><div class="skill-icon">⌨</div><h3>Languages</h3></div><div class="skill-tags"><span class="tag">JavaScript</span><span class="tag">TypeScript</span><span class="tag">PHP</span></div></div>
+        <div class="skill-card"><div class="skill-head"><div class="skill-icon">▣</div><h3>Frontend</h3></div><div class="skill-tags"><span class="tag">React.js</span><span class="tag">Next.js</span><span class="tag">Redux</span><span class="tag">Context API</span><span class="tag">Tailwind CSS</span><span class="tag">Material UI</span><span class="tag">jQuery</span></div></div>
+        <div class="skill-card"><div class="skill-head"><div class="skill-icon">⚙</div><h3>Backend</h3></div><div class="skill-tags"><span class="tag">Node.js</span><span class="tag">Express.js</span><span class="tag">Laravel</span><span class="tag">REST API</span><span class="tag">WebSocket</span><span class="tag">Socket.io</span><span class="tag">MQTT</span><span class="tag">BullMQ</span><span class="tag">Generative AI</span></div></div>
+        <div class="skill-card"><div class="skill-head"><div class="skill-icon">⛁</div><h3>Databases & Caching</h3></div><div class="skill-tags"><span class="tag">MongoDB</span><span class="tag">MySQL</span><span class="tag">Redis</span><span class="tag">Aggregations</span><span class="tag">Indexing</span><span class="tag">Query Optimization</span></div></div>
+        <div class="skill-card"><div class="skill-head"><div class="skill-icon">☁</div><h3>Cloud & DevOps</h3></div><div class="skill-tags"><span class="tag">AWS</span><span class="tag">Docker</span><span class="tag">CI/CD</span><span class="tag">Git</span><span class="tag">SonarQube</span><span class="tag">SeaweedFS</span></div></div>
+        <div class="skill-card"><div class="skill-head"><div class="skill-icon">▦</div><h3>Architecture & Tools</h3></div><div class="skill-tags"><span class="tag">Microservices</span><span class="tag">Monolithic</span><span class="tag">API Design</span><span class="tag">Electron.js</span><span class="tag">JIRA</span><span class="tag">Trello</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="alt">
+    <div class="container">
+      <div class="sec-head">
+        <p class="sec-eyebrow">03 / Experience</p>
+        <h2 class="sec-title">Places I've <span class="brand">shipped with.</span></h2>
+        <p class="sec-desc">From MERN integrations to real-time medical dashboards — four years of production work across three high-trust teams.</p>
+      </div>
+      <div class="exp-grid">
+        <ul class="exp-list" id="expList">
+          <li><button class="active" data-idx="0"><div class="period">Apr 2025 — Present</div><div class="co">Kali MedTech Pvt. Ltd</div><div class="role">Software Engineer</div></button></li>
+          <li><button data-idx="1"><div class="period">Sep 2024 — Mar 2025</div><div class="co">WildTigers Technologies</div><div class="role">Senior Web Developer</div></button></li>
+          <li><button data-idx="2"><div class="period">Dec 2021 — Aug 2024</div><div class="co">Mind Inventory</div><div class="role">Associate Software Engineer</div></button></li>
+        </ul>
+        <article class="exp-card" id="expCard"></article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+      <div class="sec-head">
+        <p class="sec-eyebrow">04 / Selected Work</p>
+        <h2 class="sec-title">Products I've helped <span class="brand">build.</span></h2>
+        <p class="sec-desc">A snapshot of recent work across healthtech, AI SaaS and multi-tenant platforms.</p>
+      </div>
+      <div class="proj-grid" id="projGrid"></div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section id="awards" class="alt">
+    <div class="container">
+      <div class="sec-head">
+        <p class="sec-eyebrow">05 / Awards</p>
+        <h2 class="sec-title">Some <span class="brand">recognition</span> along the way.</h2>
+        <p class="sec-desc">Awards I'm proud of — reminders that consistent work gets seen.</p>
+      </div>
+      <div class="awards">
+        <div class="award">
+          <div class="award-head"><div class="award-icon">🏆</div><div><h3>Rising Talent Award</h3><div class="org">WildTigers Technologies</div></div></div>
+          <p>Recognized for rapid ownership and high-impact contributions across multiple client projects.</p>
+        </div>
+        <div class="award">
+          <div class="award-head"><div class="award-icon">🏆</div><div><h3>Best Contributor</h3><div class="org">Mind Inventory</div></div></div>
+          <p>Awarded for consistent delivery, performance optimization work and mentoring peers on MERN stack.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="sec-head">
+        <p class="sec-eyebrow">06 / Contact</p>
+        <h2 class="sec-title">Got an idea worth <span class="brand">building?</span></h2>
+        <p class="sec-desc">I'm open to full-time roles, freelance work and interesting collaborations — especially around real-time systems and AI-powered products.</p>
+      </div>
+      <div class="contact-grid">
+        <div>
+          <a href="mailto:jerawalatufel@gmail.com" class="info-card"><div class="info-icon">✉</div><div><div class="label">Email</div><div class="val">jerawalatufel@gmail.com</div></div><div class="arrow">→</div></a>
+          <a href="tel:+919316108363" class="info-card"><div class="info-icon">☎</div><div><div class="label">Phone</div><div class="val">+91 93161 08363</div></div><div class="arrow">→</div></a>
+          <a href="https://wa.me/919316108363" target="_blank" rel="noreferrer" class="info-card"><div class="info-icon">💬</div><div><div class="label">WhatsApp</div><div class="val">+91 93161 08363</div></div><div class="arrow">→</div></a>
+          <div class="info-card"><div class="info-icon">📍</div><div><div class="label">Location</div><div class="val">Ahmedabad, Gujarat, India</div></div></div>
+        </div>
+        <form class="contact-form" onsubmit="return submitContactForm(event)">
+          <div class="field"><label for="cname">Your name</label><input id="cname" required placeholder="Jane Doe"></div>
+          <div class="field"><label for="cemail">Email</label><input id="cemail" type="email" required placeholder="jane@company.com"></div>
+          <div class="field"><label for="cmsg">Message</label><textarea id="cmsg" required placeholder="Tell me about your project…"></textarea></div>
+          <button type="submit" class="btn btn-dark">Send message →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container footer-top">
+    <div class="footer-about">
+      <div class="footer-logo">MT</div>
+      <div class="footer-about-text">
+        <p class="footer-name">Mohammad Tufel</p>
+        <p class="footer-copy">Full Stack Developer building reliable, real-time products from Ahmedabad, India.</p>
+      </div>
+    </div>
+    <div class="footer-nav">
+      <p class="footer-label">Navigate</p>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#awards">Awards</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-elsewhere">
+      <p class="footer-label">Elsewhere</p>
+      <div class="footer-socials">
+        <a href="https://github.com/jerawalatufel" target="_blank" rel="noreferrer" class="social-icon">Git</a>
+        <a href="https://www.linkedin.com/in/mohammad-tufel-jerawala-b9907b19a/" target="_blank" rel="noreferrer" class="social-icon">in</a>
+        <a href="mailto:jerawalatufel@gmail.com" class="social-icon">✉</a>
+      </div>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <p>© <span id="yr"></span> Mohammad Tufel Jerawala.</p>
+    <a href="#top" class="back-top">Back to top ↑</a>
+  </div>
+</footer>
+
+<script>
+  // year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // navbar shadow on scroll
+  const nav = document.getElementById('nav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
+  document.addEventListener('scroll', onScroll); onScroll();
+
+  // experience tabs
+  const jobs = [
+    {role:"Software Engineer",co:"Kali MedTech Pvt. Ltd",period:"Apr 2025 — Present",loc:"Ahmedabad, IN",
+     summary:"Leading development of a real-time ECG monitoring platform with microservices, Electron desktop sync and live data visualization.",
+     bullets:["Led development and maintenance of a real-time ECG monitoring panel using Next.js and Express.js.","Refactored code with SonarQube, upgraded dependencies and reduced build size for better performance.","Enhanced microservices architecture for improved system reliability and throughput.","Built an Electron.js desktop app to sync offline ECG data via Wi-Fi and automate backend uploads.","Designed patient-wise MongoDB collections for ECG & LLM-based arrhythmia data, improving retrieval speed.","Implemented wallet and payment integration across admin, clinics and patient flows.","Developed real-time ECG visualization using Canvas and Chart.js for live monitoring."],
+     stack:["Next.js","TypeScript","Node.js","Express","Electron","MongoDB","Redis","Socket.io","MQTT","BullMQ","AWS"]},
+    {role:"Senior Web Developer",co:"WildTigers Technologies",period:"Sep 2024 — Mar 2025",loc:"Ahmedabad, IN",
+     summary:"Senior engineering across multiple SaaS products — multi-tenant CRM, scheduling, real-time chat and AI features.",
+     bullets:["Architected per-firm isolated databases and a custom RBAC engine for a multi-tenant CRM.","Built real-time chat and scheduling using Socket.io with optimized event channels.","Shipped Generative AI features for personas, topics and automated reports.","Mentored junior developers and led code reviews on the MERN stack."],
+     stack:["React","Node.js","Express","MongoDB","Socket.io","Generative AI","RBAC"]},
+    {role:"Associate Software Engineer",co:"Mind Inventory",period:"Dec 2021 — Aug 2024",loc:"Ahmedabad, IN",
+     summary:"End-to-end MERN delivery on global clients — bookings, e-commerce, productivity and event platforms.",
+     bullets:["Integrated Mews distributor for live hotel availability, pricing and secure checkout.","Built restaurant ops platform with mobile ordering, table & venue management and live order status.","Contributed to a high-conversion supplements e-commerce store serving 3.5L+ users.","Built timezone normalization for a global event scheduling platform."],
+     stack:["React","Node.js","Express","MongoDB","Tailwind","REST APIs","Payments"]}
+  ];
+  const card = document.getElementById('expCard');
+  function renderJob(i){
+    const j = jobs[i];
+    card.innerHTML = `
+      <h3>${j.role} <span class="brand">@ ${j.co}</span></h3>
+      <div class="meta">${j.period} • 📍 ${j.loc}</div>
+      <p class="summary">${j.summary}</p>
+      <ul class="bullets">${j.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+      <div class="stack-row">${j.stack.map(s=>`<span class="tag">${s}</span>`).join('')}</div>`;
+  }
+  renderJob(0);
+  document.querySelectorAll('#expList button').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('#expList button').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      renderJob(parseInt(btn.dataset.idx,10));
+    });
+  });
+
+  // projects
+  const projects = [
+    {n:"01",tag:"Healthcare • Real-time",title:"OOM Cardio Web",blurb:"Real-time ECG monitoring panel with multi-tenant clinics, patch lifecycle, and live waveform analytics.",detail:"Built a monitoring panel letting super admins manage clinics and distributors, assign ECG patches and monitor live/historical ECG data. Architected event-driven microservices, Redis caching and patient-wise Socket.IO channels. Added multi-session auth with device tracking and remote logout, plus an arrhythmia report module rendering ECG waveforms in 10s intervals.",points:["Event-driven microservices architecture","Real-time patient-wise Socket channels","Multi-session auth with remote logout"],stack:["Next.js","Express","Microservices","MongoDB","Redis","Socket.io","Canvas","AWS"]},
+    {n:"02",tag:"AI • SaaS",title:"GEO Intelligence",blurb:"Generative Engine Optimization platform producing AI personas, topics and strategic reports.",detail:"Designed a platform helping companies optimize their presence for AI-driven search engines. Integrated Generative AI APIs to produce customer personas, marketing topics, prompts and analytical reports. Built a company verification and product ingestion pipeline, automated persona generation and a report engine providing actionable insights.",points:["AI-generated personas & content topics","Automated report generation pipeline","Product ingestion & verification APIs"],stack:["React","Node.js","Generative AI","REST APIs","MongoDB","AWS"]},
+    {n:"03",tag:"SaaS • Multi-tenant",title:"Spinalogy CRM",blurb:"Multi-firm SaaS CRM with isolated databases, RBAC, scheduling and real-time chat.",detail:"A SaaS CRM supporting multiple firms under different domains with independent databases ensuring data isolation, scalability and security. Implemented role-based access and permission management, a calendar module for scheduling and reminders, automated reporting and a real-time chat system for intra-firm collaboration.",points:["Per-firm isolated databases","Custom RBAC & permissions engine","Realtime chat + scheduling"],stack:["React","Node.js","MongoDB","Socket.io","RBAC","AWS"]},
+    {n:"04",tag:"Travel • Live",title:"pangeapod.com",blurb:"A live hotel booking distributor integration enabling real-time room availability, pricing and secure checkout.",detail:"Built a hotel booking experience integrated with the Mews distributor platform — enabling guests to search rooms, view live availability and rates, apply promo shortcodes and complete secure bookings end-to-end. Focused on clean UX, mobile responsiveness and reliable third-party API integration so travelers get real-time data and hoteliers get conversion-friendly flows.",points:["Live Mews distributor integration","Real-time availability & pricing","Promo shortcode → instant checkout"],stack:["React","Node.js","MySql","REST APIs","Tailwind","Payments","AWS"],live:"https://app.mews.com/distributor/0f00b7ad-e000-4bd6-9110-b2c901834236?check_from=shortcode"},
+    {n:"05",tag:"Restaurant SaaS • Live",title:"Instadine",blurb:"A restaurant operations platform with mobile ordering, digital menus, table management and a sleek owner dashboard.",detail:"Instadine helps restaurants go beyond transactions — enabling guests to order and pay from their phone while owners manage menus, tables and performance from a single dashboard. I worked on building intuitive customer-facing flows, menu configuration tooling, table-wise order management and real-time status updates so staff can cover more tables with less overhead.",points:["Customer-facing mobile ordering & checkout","Menu, table & venue management dashboard","Order lifecycle with live status updates"],stack:["React","Express","MongoDB","Tailwind CSS","Payments","AWS"],live:"https://instadine.io/"},
+    {n:"06",tag:"E-commerce • Live",title:"Nutristar",blurb:"Health supplements store trusted by 3.5L+ users — protein, gainers, creatine, pre-workouts, vitamins and more.",detail:"Nutristar is a high-volume health supplements e-commerce platform with hundreds of SKUs across proteins, gainers, creatines, pre-workouts, multivitamins and wellness. I contributed to storefront performance, product discovery, rewards (NutriCash), cart and checkout flows — focused on mobile-first UX, conversion and reliable integrations with shipping, payments and notification services.",points:["Trusted by 3.5L+ users, 2L+ app downloads","Rewards engine (NutriCash) & referrals","High-conversion PDP, cart & checkout"],stack:["React","REST APIs","Node.js","MySql","Payments","Tailwind","AWS"],live:"https://nutristar.in/"},
+    {n:"07",tag:"Productivity • Global",title:"EVA Event Management",blurb:"Global meeting scheduling platform with multi-region time zone handling and role-based events.",detail:"A global meeting and event management platform with role-based scheduling (organizer, participant, admin) for structured event coordination. Supports multi-region time zone normalization, notification modules for email and in-app reminders, and accurate event scheduling across distributed participants.",points:["Time-zone normalization engine","Role-based event coordination","Multi-channel notifications"],stack:["React","Node.js","MongoDB","Notifications","AWS"]},
+    {n:"08",tag:"Desktop • Fleet",title:"Aussi Car Rental Management System",blurb:"Electron desktop app for rental operators to manage bookings, fleet inventory and customer workflows.",detail:"Built a desktop car rental management system using Electron, Node.js and MongoDB with REST APIs for bookings, vehicle tracking, invoicing and fleet reporting. Designed an offline-friendly desktop experience with a responsive UI, local sync capability, and admin workflows for rental operations.",points:["Electron desktop application","Node.js backend with REST APIs","MongoDB fleet and booking management"],stack:["Electron","Node.js","MongoDB","REST APIs","Desktop","Fleet Management"]}
+  ];
+  document.getElementById('projGrid').innerHTML = projects.map((p,i)=>`
+    <article class="proj" data-idx="${i}">
+      <div class="top"><div class="label">${p.n} — ${p.tag}</div><button type="button" class="card-action" aria-label="Open ${p.title}">↗</button></div>
+      <h3>${p.title}</h3>
+      <p class="blurb">${p.blurb}</p>
+      ${p.live ? `<a href="${p.live}" target="_blank" rel="noreferrer" class="live-link">Visit live site <span>↗</span></a>` : ''}
+      <ul class="points">${p.points.map(pt=>`<li>${pt}</li>`).join('')}</ul>
+      <div class="stack-row">${p.stack.map(s=>`<span class="tag">${s}</span>`).join('')}</div>
+    </article>`).join('');
+
+  // Project modal
+  function openModal(i){
+    const p = projects[i];
+    const node = document.createElement('div');
+    node.className = 'modal-backdrop';
+    node.innerHTML = `
+      <div class="modal" role="dialog" aria-modal="true">
+        <button class="modal-close" aria-label="Close">✕</button>
+        <p class="m-tag">${p.tag}</p>
+        <h3>${p.title}</h3>
+        <p class="detail">${p.detail}</p>
+        <p class="m-label">Key highlights</p>
+        <ul class="m-points">${p.points.map(pt=>`<li>${pt}</li>`).join('')}</ul>
+        <p class="m-label">Stack</p>
+        <div class="m-stack">${p.stack.map(s=>`<span class="tag">${s}</span>`).join('')}</div>
+        ${p.live ? `<a href="${p.live}" target="_blank" rel="noreferrer" class="visit">Visit live site →</a>` : ''}
+      </div>`;
+    document.body.appendChild(node);
+    document.body.style.overflow = 'hidden';
+    const close = () => { node.remove(); document.body.style.overflow=''; document.removeEventListener('keydown', onEsc); };
+    const onEsc = (e) => { if(e.key === 'Escape') close(); };
+    node.addEventListener('click', (e)=>{ if(e.target === node) close(); });
+    node.querySelector('.modal-close').addEventListener('click', close);
+    document.addEventListener('keydown', onEsc);
+  }
+  document.querySelectorAll('#projGrid .proj').forEach(el=>{
+    el.querySelectorAll('.live-link').forEach(link=>{
+      link.addEventListener('click', e=> e.stopPropagation());
+    });
+    el.addEventListener('click', ()=> openModal(parseInt(el.dataset.idx,10)));
+  });
+
+  function submitContactForm(event){
+    event.preventDefault();
+    const name = document.getElementById('cname').value.trim();
+    const email = document.getElementById('cemail').value.trim();
+    const message = document.getElementById('cmsg').value.trim();
+    if(!name || !email || !message){
+      alert('Please fill all fields before sending.');
+      return false;
+    }
+    const subject = encodeURIComponent(`Contact from ${name}`);
+    const body = encodeURIComponent(`Name: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`);
+    window.location.href = `mailto:jerawalatufel@gmail.com?subject=${subject}&body=${body}`;
+    document.querySelector('.contact-form').reset();
+    return false;
+  }
+</script>
+</body>
+</html>
