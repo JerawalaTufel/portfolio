@@ -506,21 +506,60 @@
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 12);
   document.addEventListener('scroll', onScroll); onScroll();
 
-  // experience tabs
+  // experience tabs — updated with detailed bullet points
   const jobs = [
-    {role:"Software Engineer",co:"Kali MedTech Pvt. Ltd",period:"Apr 2025 — Present",loc:"Ahmedabad, IN",
-     summary:"Leading development of a real-time ECG monitoring platform with microservices, Electron desktop sync and live data visualization.",
-     bullets:["Led development and maintenance of a real-time ECG monitoring panel using Next.js and Express.js.","Refactored code with SonarQube, upgraded dependencies and reduced build size for better performance.","Enhanced microservices architecture for improved system reliability and throughput.","Built an Electron.js desktop app to sync offline ECG data via Wi-Fi and automate backend uploads.","Designed patient-wise MongoDB collections for ECG & LLM-based arrhythmia data, improving retrieval speed.","Implemented wallet and payment integration across admin, clinics and patient flows.","Developed real-time ECG visualization using Canvas and Chart.js for live monitoring."],
-     stack:["Next.js","TypeScript","Node.js","Express","Electron","MongoDB","Redis","Socket.io","MQTT","BullMQ","AWS"]},
-    {role:"Senior Web Developer",co:"WildTigers Technologies",period:"Sep 2024 — Mar 2025",loc:"Ahmedabad, IN",
-     summary:"Senior engineering across multiple SaaS products — multi-tenant CRM, scheduling, real-time chat and AI features.",
-     bullets:["Architected per-firm isolated databases and a custom RBAC engine for a multi-tenant CRM.","Built real-time chat and scheduling using Socket.io with optimized event channels.","Shipped Generative AI features for personas, topics and automated reports.","Mentored junior developers and led code reviews on the MERN stack."],
-     stack:["React","Node.js","Express","MongoDB","Socket.io","Generative AI","RBAC"]},
-    {role:"Associate Software Engineer",co:"Mind Inventory",period:"Dec 2021 — Aug 2024",loc:"Ahmedabad, IN",
-     summary:"End-to-end MERN delivery on global clients — bookings, e-commerce, productivity and event platforms.",
-     bullets:["Integrated Mews distributor for live hotel availability, pricing and secure checkout.","Built restaurant ops platform with mobile ordering, table & venue management and live order status.","Contributed to a high-conversion supplements e-commerce store serving 3.5L+ users.","Built timezone normalization for a global event scheduling platform."],
-     stack:["React","Node.js","Express","MongoDB","Tailwind","REST APIs","Payments"]}
+    {
+      role: "Software Engineer",
+      co: "Kali MedTech Pvt. Ltd",
+      period: "Apr 2025 — Present",
+      loc: "Ahmedabad, IN",
+      summary: "Leading development of a real-time ECG monitoring platform with microservices, Electron desktop sync and live data visualization.",
+      bullets: [
+        "Led real-time ECG monitoring panel development using Next.js and Express.js, reducing data latency by 30% via optimized WebSockets.",
+        "Refactored codebase using SonarQube, decreasing complexity by 25% and improving CI/CD performance with reduced build size.",
+        "Optimized MongoDB schema and indexing for ECG and arrhythmia data, boosting query performance by 35%.",
+        "Built Electron.js app for offline ECG sync and automated uploads, eliminating manual data entry for clinic staff.",
+        "Developed real-time ECG visualization with Canvas and Chart.js, supporting monitoring for 100+ concurrent patients.",
+        "Improved microservices reliability using BullMQ queues, reducing background job failures by 40%.",
+        "Upgraded frontend (React 18 → 19) and backend (Node.js 20 → 22), improving performance, security, and compatibility with modern features and libraries."
+      ],
+      stack: ["JavaScript","TypeScript","Node.js","Express.js","Next.js","Electron.js","Context API","Jest","MongoDB","Redis","MQTT","BullMQ","Socket.IO","Microservices","Tailwind CSS","Material UI","SonarQube","AWS","Docker"]
+    },
+    {
+      role: "Senior Web Developer",
+      co: "WildTigers Technologies",
+      period: "Sep 2024 — Mar 2025",
+      loc: "Ahmedabad, IN",
+      summary: "Senior engineering across multiple SaaS products — multi-tenant CRM, scheduling, real-time chat and AI features.",
+      bullets: [
+        "Developed 3+ scalable web applications using React.js and Express.js, supporting 10,000+ active users with high performance.",
+        "Implemented secure authentication and authorization using JWT, Passport.js, and OAuth 2.0, reducing unauthorized access by 95%.",
+        "Built real-time features with WebSocket and Socket.IO, achieving sub-100ms latency for 500+ concurrent users.",
+        "Managed 4+ projects in Agile/Scrum, consistently meeting deadlines and maintaining 98% client satisfaction.",
+        "Integrated AWS S3, MSG91, Twilio, and SendGrid for cloud storage and automated communication workflows.",
+        "Integrated multiple payment gateways (Stripe, PayPal, Moneris 3D Secure, Razorpay), reducing checkout abandonment by 15% through seamless transaction flows across 3+ applications."
+      ],
+      stack: ["JavaScript","TypeScript","Node.js","Express.js","React.js","Redux","MySQL","MongoDB","Redis","Docker","AWS","Bootstrap","Tailwind CSS","Git","Twilio","SendGrid","Socket.io","JWT","OAuth 2.0"]
+    },
+    {
+      role: "Associate Software Engineer",
+      co: "Mind Inventory",
+      period: "Dec 2021 — Aug 2024",
+      loc: "Ahmedabad, IN",
+      summary: "End-to-end MERN delivery on global clients — bookings, e-commerce, productivity and event platforms.",
+      bullets: [
+        "Built platform-to-platform integrations using RESTful APIs on the MERN stack, enabling seamless data exchange across 5+ third-party systems.",
+        "Optimized MySQL queries and MongoDB aggregations with indexing, reducing page load time by 40% during peak traffic.",
+        "Developed API monitoring and logging system, resolving 90% of issues proactively and reducing downtime by 60%.",
+        "Created 10+ responsive, cross-browser applications using React.js for web and mobile users.",
+        "Converted 15+ Figma designs into pixel-perfect UIs using Tailwind CSS, ensuring WCAG 2.1 accessibility compliance.",
+        "Automated email workflows using SendGrid API, reducing manual effort by 70% and improving delivery rates to 98%.",
+        "Actively contributed to Agile/Scrum processes, improving team velocity by 20% through effective sprint participation."
+      ],
+      stack: ["JavaScript","TypeScript","React.js","Express.js","Laravel","MySQL","MongoDB","Git","REST APIs","Bootstrap","Tailwind CSS","SendGrid"]
+    }
   ];
+
   const card = document.getElementById('expCard');
   function renderJob(i){
     const j = jobs[i];
